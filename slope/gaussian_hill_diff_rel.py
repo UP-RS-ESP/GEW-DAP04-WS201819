@@ -41,6 +41,8 @@ for k in range(2):
     im = ax[i, k].pcolormesh(xb, yb, v[k],
             cmap = pl.cm.seismic, vmin = -100, vmax = 100)
     cb = fg.colorbar(im, ax = ax[i, k])
+    cs = ax[i, k].contour(xc, yc, dem, 5, colors = 'k')
+    ax[i, k].clabel(cs)
     cb.set_label(l[k])
     ax[i, k].set_aspect('equal')
 
