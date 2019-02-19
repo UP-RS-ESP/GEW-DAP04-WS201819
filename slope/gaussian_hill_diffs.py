@@ -22,26 +22,16 @@ dx = np.ma.masked_invalid(dx)
 dy = np.ma.masked_invalid(dy)
 
 fg, ax = pl.subplots(ncols = 2, nrows = 2)
-var = [[tdx, tdy], [dx-tdx, dy-tdy]]
-lbl = [['tdx', 'tdy'], ['absolute dx deviation', 'absolute dy deviation']]
+var = [[tdx, tdy], [dx, dy]]
+lbl = [['tdx', 'tdy'], ['dx', 'dy']]
 
-i = 0
-v = var[i]
-l = lbl[i]
-for k in range(2):
-    im = ax[i, k].pcolormesh(xb, yb, v[k])
-    cb = fg.colorbar(im, ax = ax[i, k])
-    cb.set_label(l[k])
-    ax[i, k].set_aspect('equal')
-
-i = 1
-v = var[i]
-l = lbl[i]
-for k in range(2):
-    im = ax[i, k].pcolormesh(xb, yb, v[k],
-            cmap = pl.cm.seismic, vmin = -0.25, vmax = 0.25)
-    cb = fg.colorbar(im, ax = ax[i, k])
-    cb.set_label(l[k])
-    ax[i, k].set_aspect('equal')
+for i in range(2):
+    v = var[i]
+    l = lbl[i]
+    for k in range(2):
+        im = ax[i, k].pcolormesh(xb, yb, v[k])
+        cb = fg.colorbar(im, ax = ax[i, k])
+        cb.set_label(l[k])
+        ax[i, k].set_aspect('equal')
 
 pl.show()
