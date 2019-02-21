@@ -15,14 +15,15 @@ def gendata(m, shape):
 
 bins = np.zeros(shape)
 data = gendata(m, shape)
+idat = data.astype('int')
 
-for i in range(m):
-    xi, yi = int(data[i, 0]), int(data[i, 1])
-    bins[yi, xi] += 1
+for i in range(shape[0]):
+    for k in range(shape[1]):
+        b = (idat[:, 1] == i) * (idat[:, 0] == k)
+        bins[i, k] = b.sum()
 
 pl.pcolormesh(xb, yb, bins)
 pl.colorbar()
-#pl.scatter(data[:i+1,0], data[:i+1,1], s = 5, c = 'r')
 pl.scatter(data[:, 0], data[:, 1], s = 5, c = 'r')
 pl.axes().set_aspect('equal')
 pl.show()
