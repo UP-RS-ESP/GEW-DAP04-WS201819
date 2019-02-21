@@ -29,24 +29,25 @@ def main():
     # numerical estimation
     dy, dx = gradient(dem, width)
     ndy, ndx = np.gradient(dem, width)
-    var = [[dy, dx], [100*(dy-ndy)/ndy, 100*(dx-ndx)/ndy]]
-    lbl = [['dy', 'dx'], ['dy - numpy dy [%]', 'dx - numpy dx [%]']]
-    levels = [np.linspace(-0.8, 0.8, 9), np.linspace(-100, 100, 6)]
+    dr = np.arctan(np.sqrt(dx*dx+dy*dy)) * 180 / np.pi
+    ndr = np.arctan(np.sqrt(ndx*ndx+ndy*ndy)) * 180 / np.pi
+    #     ^ -> degrees
     
     # create figure
-    fg, ax = pl.subplots(nrows = 2, ncols = 2)
-    for i in range(2):
-        v = var[i]
-        l = lbl[i]
-        lv = levels[i]
-        for k in range(2):
-            im = ax[i, k].contourf(xc, yc, v[k], lv,
-                    cmap = pl.cm.seismic, extend = 'both')
-            im.cmap.set_under('c')
-            im.cmap.set_over('m')
-            cb = fg.colorbar(im, ax = ax[i, k])
-            cb.set_label(l[k])
-            ax[i, k].set_aspect('equal')
+    fg, ax = pl.subplots(ncols = 2)
+
+    im = ax[0].contourf(xc, yc, ndr, 6)
+    cb = fg.colorbar(im, ax = ax[0],
+            orientation = 'horizontal')
+    cb.set_label('Numpy gradient [deg]')
+    ax[0].set_aspect('equal')
+
+    im = ax[1].contourf(xc, yc, 100*(dr-ndr)/ndr, 10,
+            cmap = pl.cm.seismic)
+    cb = fg.colorbar(im, ax = ax[1],
+            orientation = 'horizontal')
+    cb.set_label('Rel. diff. [deg]')
+    ax[1].set_aspect('equal')
 
     pl.show()
 
