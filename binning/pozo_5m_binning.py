@@ -2,9 +2,15 @@ import numpy as np
 from matplotlib import pyplot as pl
 from matplotlib.colors import LogNorm
 
-fn = '../pozo-steep-vegetated-pcl.npy'
-pts = np.load(fn)
-x, y = pts[:, 0], pts[:, 1]
+#fn = '../pozo-steep-vegetated-pcl.npy'
+#pts = np.load(fn)
+#x, y = pts[:, 0], pts[:, 1]
+fn = '../pozo-steep-vegetated-pcl.npz'
+f = np.load(fn)
+x = f['x']
+y = f['y']
+f.close()
+
 ix = (0.2 * (x - x.min())).astype('int')
 iy = (0.2 * (y - y.min())).astype('int')
 
