@@ -20,7 +20,7 @@ print(X)
 print('Y:')
 print(Y)
 
-Z = griddata((x, y), z, (X, Y))
+Z = griddata((x, y), z, (X, Y), method = 'linear')
 
 print('Z:')
 print(Z)

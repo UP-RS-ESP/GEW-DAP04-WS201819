@@ -8,8 +8,10 @@ x, y, c = pts[:, 0], pts[:, 1], pts[:, 5]
 ix = (2 * (x - x.min())).astype('int')
 iy = (2 * (y - y.min())).astype('int')
 
-b = c == 2
+b = c == 5
+print(len(ix))
 ix, iy = ix[b], iy[b]
+print(len(ix))
 
 shape = (1000, 1000)
 xb = np.arange(x.min(), x.min()+500, 0.5)

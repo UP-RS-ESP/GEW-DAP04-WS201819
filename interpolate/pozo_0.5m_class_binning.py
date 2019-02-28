@@ -9,8 +9,8 @@ ix = (2 * (x - x.min())).astype('int')
 iy = (2 * (y - y.min())).astype('int')
 
 shape = (1000, 1000)
-xb = np.arange(shape[1])
-yb = np.arange(shape[0])
+xb = np.arange(shape[1]+1)
+yb = np.arange(shape[0]+1)
 fg, ax = pl.subplots(ncols = 2, nrows = 2,
             figsize = (10.24, 7.68),
             sharex = True, sharey = True)
